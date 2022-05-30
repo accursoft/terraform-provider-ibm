@@ -309,8 +309,8 @@ func dataSourceIBMSecretsManagerSecretRead(context context.Context, d *schema.Re
 	if getSecret.Resources != nil {
 		for _, resourcesItem := range getSecret.Resources {
 			if ritem, ok := resourcesItem.(*secretsmanagerv1.SecretResource); ok {
-				if ritem.Type != nil {
-					d.Set("type", *ritem.Type)
+				if ritem.SecretType != nil {
+					d.Set("type", *ritem.SecretType)
 				}
 				if ritem.Name != nil {
 					d.Set("name", *ritem.Name)

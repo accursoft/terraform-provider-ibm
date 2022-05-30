@@ -392,8 +392,8 @@ func dataSourceListSecretsFlattenResources(result []secretsmanagerv1.SecretResou
 func dataSourceListSecretsResourcesToMap(resourcesItem secretsmanagerv1.SecretResource) (resourcesMap map[string]interface{}) {
 	resourcesMap = map[string]interface{}{}
 
-	if resourcesItem.Type != nil {
-		resourcesMap["type"] = *resourcesItem.Type
+	if resourcesItem.SecretType != nil {
+		resourcesMap["type"] = *resourcesItem.SecretType
 	}
 	if resourcesItem.ID != nil {
 		resourcesMap["secret_id"] = *resourcesItem.ID
