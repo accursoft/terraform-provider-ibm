@@ -544,7 +544,7 @@ func DataSourceIBMSmSecretsSecretResourceToMap(model secretsmanagerv1.SecretReso
 			modelMap["expiration_date"] = model.ExpirationDate.String()
 		}
 		if model.Payload != nil {
-			modelMap["payload"] = *model.Payload
+			modelMap["payload"] = model.Payload
 		}
 		if model.SecretData != nil {
 		}
@@ -782,7 +782,7 @@ func DataSourceIBMSmSecretsArbitrarySecretResourceToMap(model *secretsmanagerv1.
 		modelMap["expiration_date"] = model.ExpirationDate.String()
 	}
 	if model.Payload != nil {
-		modelMap["payload"] = *model.Payload
+		modelMap["payload"] = model.Payload
 	}
 	if model.SecretData != nil {
 	}

@@ -438,7 +438,7 @@ func dataSourceListSecretsResourcesToMap(resourcesItem secretsmanagerv1.SecretRe
 		resourcesMap["expiration_date"] = (*resourcesItem.ExpirationDate).String()
 	}
 	if resourcesItem.Payload != nil {
-		resourcesMap["payload"] = *resourcesItem.Payload
+		resourcesMap["payload"] = resourcesItem.Payload
 	}
 	if resourcesItem.SecretData != nil {
 		secretData := resourcesItem.SecretData.(map[string]interface{})
