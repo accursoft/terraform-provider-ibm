@@ -103,6 +103,8 @@ func testAccCheckIBMSmEventNotificationExists(n string, obj secretsmanagerv1.Not
 
 		getNotificationsRegistrationOptions := &secretsmanagerv1.GetNotificationsRegistrationOptions{}
 
+		//getNotificationsRegistrationOptions.(rs.Primary.ID)
+
 		notificationsSettings, _, err := secretsManagerClient.GetNotificationsRegistration(getNotificationsRegistrationOptions)
 		if err != nil {
 			return err
@@ -124,6 +126,8 @@ func testAccCheckIBMSmEventNotificationDestroy(s *terraform.State) error {
 		}
 
 		getNotificationsRegistrationOptions := &secretsmanagerv1.GetNotificationsRegistrationOptions{}
+
+		//getNotificationsRegistrationOptions.(rs.Primary.ID)
 
 		// Try to find the key
 		_, response, err := secretsManagerClient.GetNotificationsRegistration(getNotificationsRegistrationOptions)
