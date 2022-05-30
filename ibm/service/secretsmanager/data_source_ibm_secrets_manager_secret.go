@@ -343,11 +343,7 @@ func dataSourceIBMSecretsManagerSecretRead(context context.Context, d *schema.Re
 					d.Set("last_update_date", (*ritem.LastUpdateDate).String())
 				}
 				if ritem.Versions != nil {
-					versionsList := []map[string]interface{}{}
-					for _, versionsItem := range ritem.Versions {
-						versionsList = append(versionsList, dataSourceGetSecretResourcesVersionsToMap(versionsItem))
-					}
-					d.Set("versions", versionsList)
+					d.Set("versions", ritem.Versions)
 				}
 				if ritem.SecretData != nil {
 					secretData := ritem.SecretData.(map[string]interface{})

@@ -2108,10 +2108,7 @@ func ResourceIBMSmSecretSecretResourceToMap(model secretsmanagerv1.SecretResourc
 			modelMap["versions_total"] = flex.IntValue(model.VersionsTotal)
 		}
 		if model.Versions != nil {
-			versions := []map[string]interface{}{}
-			for _, versionsItem := range model.Versions {
-			}
-			modelMap["versions"] = versions
+			modelMap["versions"] = model.Versions
 		}
 		if model.ExpirationDate != nil {
 			modelMap["expiration_date"] = model.ExpirationDate.String()
@@ -2351,10 +2348,7 @@ func ResourceIBMSmSecretArbitrarySecretResourceToMap(model *secretsmanagerv1.Arb
 		modelMap["versions_total"] = flex.IntValue(model.VersionsTotal)
 	}
 	if model.Versions != nil {
-		versions := []map[string]interface{}{}
-		for _, versionsItem := range model.Versions {
-		}
-		modelMap["versions"] = versions
+		modelMap["versions"] = model.Versions
 	}
 	if model.ExpirationDate != nil {
 		modelMap["expiration_date"] = model.ExpirationDate.String()
@@ -2408,10 +2402,7 @@ func ResourceIBMSmSecretUsernamePasswordSecretResourceToMap(model *secretsmanage
 		modelMap["versions_total"] = flex.IntValue(model.VersionsTotal)
 	}
 	if model.Versions != nil {
-		versions := []map[string]interface{}{}
-		for _, versionsItem := range model.Versions {
-		}
-		modelMap["versions"] = versions
+		modelMap["versions"] = model.Versions
 	}
 	if model.Username != nil {
 		modelMap["username"] = model.Username
@@ -2471,10 +2462,7 @@ func ResourceIBMSmSecretIamCredentialsSecretResourceToMap(model *secretsmanagerv
 		modelMap["versions_total"] = flex.IntValue(model.VersionsTotal)
 	}
 	if model.Versions != nil {
-		versions := []map[string]interface{}{}
-		for _, versionsItem := range model.Versions {
-		}
-		modelMap["versions"] = versions
+		modelMap["versions"] = model.Versions
 	}
 	if model.TTL != nil {
 		modelMap["ttl"] = model.TTL
@@ -2540,10 +2528,7 @@ func ResourceIBMSmSecretCertificateSecretResourceToMap(model *secretsmanagerv1.C
 		modelMap["versions_total"] = flex.IntValue(model.VersionsTotal)
 	}
 	if model.Versions != nil {
-		versions := []map[string]interface{}{}
-		for _, versionsItem := range model.Versions {
-		}
-		modelMap["versions"] = versions
+		modelMap["versions"] = model.Versions
 	}
 	if model.Certificate != nil {
 		modelMap["certificate"] = model.Certificate
@@ -2634,10 +2619,7 @@ func ResourceIBMSmSecretPublicCertificateSecretResourceToMap(model *secretsmanag
 		modelMap["versions_total"] = flex.IntValue(model.VersionsTotal)
 	}
 	if model.Versions != nil {
-		versions := []map[string]interface{}{}
-		for _, versionsItem := range model.Versions {
-		}
-		modelMap["versions"] = versions
+		modelMap["versions"] = model.Versions
 	}
 	if model.Issuer != nil {
 		modelMap["issuer"] = model.Issuer
@@ -2739,10 +2721,7 @@ func ResourceIBMSmSecretPrivateCertificateSecretResourceToMap(model *secretsmana
 		modelMap["versions_total"] = flex.IntValue(model.VersionsTotal)
 	}
 	if model.Versions != nil {
-		versions := []map[string]interface{}{}
-		for _, versionsItem := range model.Versions {
-		}
-		modelMap["versions"] = versions
+		modelMap["versions"] = model.Versions
 	}
 	modelMap["certificate_template"] = model.CertificateTemplate
 	if model.CertificateAuthority != nil {
@@ -2851,10 +2830,7 @@ func ResourceIBMSmSecretKvSecretResourceToMap(model *secretsmanagerv1.KvSecretRe
 		modelMap["versions_total"] = flex.IntValue(model.VersionsTotal)
 	}
 	if model.Versions != nil {
-		versions := []map[string]interface{}{}
-		for _, versionsItem := range model.Versions {
-		}
-		modelMap["versions"] = versions
+		modelMap["versions"] = model.Versions
 	}
 	if model.ExpirationDate != nil {
 		modelMap["expiration_date"] = model.ExpirationDate.String()
