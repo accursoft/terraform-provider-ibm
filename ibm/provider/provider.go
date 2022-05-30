@@ -565,6 +565,10 @@ func Provider() *schema.Provider {
 			"ibm_enterprise_accounts":       enterprise.DataSourceIBMEnterpriseAccounts(),
 
 			// //Added for Secrets Manager
+			"ibm_sm_secret_groups": secretsmanager.DataSourceIBMSmSecretGroups(),
+			"ibm_sm_secrets": secretsmanager.DataSourceIBMSmSecrets(),
+			"ibm_sm_cert_configurations": secretsmanager.DataSourceIBMSmCertConfigurations(),
+			//legacy
 			"ibm_secrets_manager_secrets": secretsmanager.DataSourceIBMSecretsManagerSecrets(),
 			"ibm_secrets_manager_secret":  secretsmanager.DataSourceIBMSecretsManagerSecret(),
 
@@ -991,6 +995,12 @@ func Provider() *schema.Provider {
 			"ibm_en_subscription_ios":     eventnotification.ResourceIBMEnFCMSubscription(),
 			"ibm_en_subscription_chrome":  eventnotification.ResourceIBMEnFCMSubscription(),
 			"ibm_en_subscription_firefox": eventnotification.ResourceIBMEnFCMSubscription(),
+
+			// Secrets Manager
+			"ibm_sm_secret_group": secretsmanager.ResourceIBMSmSecretGroup(),
+			"ibm_sm_secret": secretsmanager.ResourceIBMSmSecret(),
+			"ibm_sm_event_notification": secretsmanager.ResourceIBMSmEventNotification(),
+			"ibm_sm_cert_configuration": secretsmanager.ResourceIBMSmCertConfiguration(),		
 		},
 
 		ConfigureFunc: providerConfigure,
@@ -1133,6 +1143,10 @@ func Validator() validate.ValidatorDict {
 
 				// // Added for Event Notifications
 				"ibm_en_destination": eventnotification.ResourceIBMEnDestinationValidator(),
+
+				// Secrets Manager
+				"ibm_sm_secret": secretsmanager.ResourceIBMSmSecretValidator(),
+				"ibm_sm_cert_configuration": secretsmanager.ResourceIBMSmCertConfigurationValidator(),			
 			},
 			DataSourceValidatorDictionary: map[string]*validate.ResourceValidator{
 				"ibm_is_subnet":          vpc.DataSourceIBMISSubnetValidator(),

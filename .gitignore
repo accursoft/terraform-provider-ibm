@@ -29,6 +29,7 @@ website/vendor
 *.xml
 *.old
 vendor/
+.openapi-generator*
 
 # Test exclusions
 !command/test-fixtures/**/*.tfstate

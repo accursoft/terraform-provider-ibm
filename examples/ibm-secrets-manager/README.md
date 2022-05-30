@@ -1,9 +1,13 @@
-# Example for Fetching SecretsManager Secrets
+# Example for SecretsManagerV1
 
-This example illustrates how to use the SecretsManagerV1 to fetch SecretsManager Secrets
+This example illustrates how to use the SecretsManagerV1
 
 These types of resources are supported:
 
+* sm_secret_group
+* sm_secret
+* sm_event_notification
+* sm_cert_configuration
 
 ## Usage
 
@@ -20,24 +24,62 @@ Run `terraform destroy` when you don't need these resources.
 
 ## SecretsManagerV1 resources
 
+sm_secret_group resource:
+
+```hcl
+resource "sm_secret_group" "sm_secret_group_instance" {
+  secret_group_resource = var.sm_secret_group_secret_group_resource
+}
+```
+sm_secret resource:
+
+```hcl
+resource "sm_secret" "sm_secret_instance" {
+  secret_type = var.sm_secret_secret_type
+  secret_resource = var.sm_secret_secret_resource
+}
+```
+sm_event_notification resource:
+
+```hcl
+resource "sm_event_notification" "sm_event_notification_instance" {
+  event_notifications_instance_crn = var.sm_event_notification_event_notifications_instance_crn
+  event_notifications_source_name = var.sm_event_notification_event_notifications_source_name
+  event_notifications_source_description = var.sm_event_notification_event_notifications_source_description
+}
+```
+sm_cert_configuration resource:
+
+```hcl
+resource "sm_cert_configuration" "sm_cert_configuration_instance" {
+  secret_type = var.sm_cert_configuration_secret_type
+  config_element = var.sm_cert_configuration_config_element
+  name = var.sm_cert_configuration_name
+  type = var.sm_cert_configuration_type
+  config = var.sm_cert_configuration_config
+}
+```
 
 ## SecretsManagerV1 Data sources
 
-secrets_manager_secrets data source:
+sm_secret_groups data source:
 
 ```hcl
-data "ibm_secrets_manager_secrets" "secrets_manager_secrets_instance" {
-  instance_id = var.secrets_manager_instance_id
-  secret_type = var.secrets_manager_secrets_secret_type
+data "sm_secret_groups" "sm_secret_groups_instance" {
 }
 ```
-secrets_manager_secret data source:
+sm_secrets data source:
 
 ```hcl
-data "ibm_secrets_manager_secret" "secrets_manager_secret_instance" {
-  instance_id = var.secrets_manager_instance_id
-  secret_type = var.secrets_manager_secret_secret_type
-  secret_id = var.secrets_manager_secret_id
+data "sm_secrets" "sm_secrets_instance" {
+}
+```
+sm_cert_configurations data source:
+
+```hcl
+data "sm_cert_configurations" "sm_cert_configurations_instance" {
+  secret_type = var.sm_cert_configurations_secret_type
+  config_element = var.sm_cert_configurations_config_element
 }
 ```
 
@@ -59,22 +101,35 @@ data "ibm_secrets_manager_secret" "secrets_manager_secret_instance" {
 
 | Name | Version |
 |------|---------|
-| ibm | 1.22.0 |
+| ibm | 1.13.1 |
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|----------|
-| ibmcloud\_api\_key | IBM Cloud API key | `string` |  | true |
-| region | Secrets Manager Instance region | `string` | us-south | false |
-| secrets\_manager\_instance\_id | Secrets Manager Instance GUID | `string` |  | true |
-| secrets\_manager\_secrets\_secret\_type | The secret type. Supported options include: arbitrary, iam_credentials, username_password. | `string` | null | false |
-| secrets\_manager\_secret\_secret\_type | The secret type. Supported options include: arbitrary, iam_credentials, username_password. | `string` |  | true |
-| secret\_id | The v4 UUID that uniquely identifies the secret. | `string` |  | true |
+| Name | Description | Type | Required |
+|------|-------------|------|---------|
+| ibmcloud\_api\_key | IBM Cloud API key | `string` | true |
+| secret_group_resource | Properties that describe a secret group. | `` | true |
+| secret_type | The secret type. Allowable values are: arbitrary, iam_credentials, imported_cert, public_cert, username_password, kv. | `string` | true |
+| secret_resource |  | `` | true |
+| event_notifications_instance_crn | The Cloud Resource Name (CRN) of the connected Event Notifications instance. | `string` | true |
+| event_notifications_source_name | The name that is displayed as a source in your Event Notifications instance. | `string` | true |
+| event_notifications_source_description | An optional description for the source in your Event Notifications instance. | `string` | false |
+| secret_type | The secret type. Allowable values are: public_cert, private_cert | `string` | true |
+| config_element | The configuration element to define or manage. Allowable values are: certificate_authorities, dns_providers, root_certificate_authorities, intermediate_certificate_authorities, certificate_templates | `string` | true |
+| name | The human-readable name to assign to your configuration. | `string` | true |
+| type | The type of configuration. Value options differ depending on the 'config_element'. Allowable values are: letsencrypt, letsencrypt-stage, cis, classic_infrastructure, root_certificate_authority, intermediate_certificate_authority | `string` | true |
+| config | The configuration to define for the specified secret type. | `` | true |
+| secret_type | The secret type. Allowable values are: public_cert, private_cert | `string` | true |
+| config_element | The configuration element to define or manage. Allowable values are: certificate_authorities, dns_providers, root_certificate_authorities, intermediate_certificate_authorities, certificate_templates | `string` | true |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| secrets\_manager\_secrets | secrets\_manager\_secrets object |
-| secrets\_manager\_secret | secrets\_manager\_secret object |
+| sm_secret_group | sm_secret_group object |
+| sm_secret | sm_secret object |
+| sm_event_notification | sm_event_notification object |
+| sm_cert_configuration | sm_cert_configuration object |
+| sm_secret_groups | sm_secret_groups object |
+| sm_secrets | sm_secrets object |
+| sm_cert_configurations | sm_cert_configurations object |
