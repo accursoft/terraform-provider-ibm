@@ -65,4 +65,3 @@ func testAccCheckIBMSmSecretsDataSourceConfigBasic(secretResourceSecretType stri
 		}
 	`, secretResourceSecretType)
 }
-

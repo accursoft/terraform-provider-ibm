@@ -7,13 +7,12 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
+	acc "github.com/IBM-Cloud/terraform-provider-ibm/ibm/acctest"
 	"github.com/IBM-Cloud/terraform-provider-ibm/ibm/conns"
 	"github.com/IBM/secrets-manager-go-sdk/secretsmanagerv1"
-	acc "github.com/IBM-Cloud/terraform-provider-ibm/ibm/acctest"
 )
 
 func TestAccIBMSmSecretGroupBasic(t *testing.T) {
@@ -56,7 +55,7 @@ func testAccCheckIBMSmSecretGroupConfigBasic() string {
 				type = "application/vnd.ibm.secrets-manager.secret.group+json"
 			}
 		}
-	`, )
+	`)
 }
 
 func testAccCheckIBMSmSecretGroupExists(n string, obj secretsmanagerv1.SecretGroupResource) resource.TestCheckFunc {

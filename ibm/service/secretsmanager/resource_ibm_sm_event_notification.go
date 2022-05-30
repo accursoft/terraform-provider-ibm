@@ -17,10 +17,10 @@ import (
 
 func ResourceIBMSmEventNotification() *schema.Resource {
 	return &schema.Resource{
-		CreateContext:   ResourceIBMSmEventNotificationCreate,
-		ReadContext:     ResourceIBMSmEventNotificationRead,
-		DeleteContext:   ResourceIBMSmEventNotificationDelete,
-		Importer: &schema.ResourceImporter{},
+		CreateContext: ResourceIBMSmEventNotificationCreate,
+		ReadContext:   ResourceIBMSmEventNotificationRead,
+		DeleteContext: ResourceIBMSmEventNotificationDelete,
+		Importer:      &schema.ResourceImporter{},
 
 		Schema: map[string]*schema.Schema{
 			"event_notifications_instance_crn": &schema.Schema{
@@ -78,7 +78,6 @@ func ResourceIBMSmEventNotificationRead(context context.Context, d *schema.Resou
 
 	getNotificationsRegistrationOptions := &secretsmanagerv1.GetNotificationsRegistrationOptions{}
 
-
 	getNotificationsSettings, response, err := secretsManagerClient.GetNotificationsRegistrationWithContext(context, getNotificationsRegistrationOptions)
 	if err != nil {
 		if response != nil && response.StatusCode == 404 {
@@ -109,7 +108,6 @@ func ResourceIBMSmEventNotificationDelete(context context.Context, d *schema.Res
 	}
 
 	deleteNotificationsRegistrationOptions := &secretsmanagerv1.DeleteNotificationsRegistrationOptions{}
-
 
 	response, err := secretsManagerClient.DeleteNotificationsRegistrationWithContext(context, deleteNotificationsRegistrationOptions)
 	if err != nil {

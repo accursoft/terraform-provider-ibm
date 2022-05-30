@@ -52,4 +52,3 @@ func testAccCheckIBMSmSecretGroupsDataSourceConfigBasic() string {
 		}
 	`)
 }
-

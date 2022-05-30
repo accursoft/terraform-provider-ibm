@@ -226,8 +226,8 @@ func DataSourceIBMSmSecrets() *schema.Resource {
 							Description: "The distinguished name that identifies the entity that signed and issued the certificate.",
 						},
 						"validity": &schema.Schema{
-							Type:        schema.TypeList,
-							Computed:    true,
+							Type:     schema.TypeList,
+							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"not_before": &schema.Schema{
@@ -279,8 +279,8 @@ func DataSourceIBMSmSecrets() *schema.Resource {
 							Description: "The name of the DNS provider configuration.",
 						},
 						"rotation": &schema.Schema{
-							Type:        schema.TypeList,
-							Computed:    true,
+							Type:     schema.TypeList,
+							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auto_rotate": &schema.Schema{
@@ -450,7 +450,7 @@ func DataSourceIBMSmSecretsRead(context context.Context, d *schema.ResourceData,
 
 	resources := []map[string]interface{}{}
 	if listSecrets.Resources != nil {
-		for _, modelItem := range listSecrets.Resources { 
+		for _, modelItem := range listSecrets.Resources {
 			modelMap, err := DataSourceIBMSmSecretsSecretResourceToMap(modelItem)
 			if err != nil {
 				return diag.FromErr(err)
