@@ -2841,16 +2841,16 @@ func (c *Config) ClientSession() (interface{}, error) {
 	}
 	/// Construct the service client.
 	session.secretsManagerClient, err = secretsmanagerv1.NewSecretsManagerV1(secretsManagerClientOptions)
-    if err == nil {
-        // Enable retries for API calls
-        session.secretsManagerClient.Service.EnableRetries(c.RetryCount, c.RetryDelay)
-        // Add custom header for analytics
-        session.secretsManagerClient.SetDefaultHeaders(gohttp.Header{
-            "X-Original-User-Agent": { fmt.Sprintf("terraform-provider-ibm/%s", version.Version) },
-        })
-    } else {
-        session.secretsManagerClientErr = fmt.Errorf("Error occurred while configuring IBM Cloud Secrets Manager API service: %q", err)
-    }
+	if err == nil {
+		// Enable retries for API calls
+		session.secretsManagerClient.Service.EnableRetries(c.RetryCount, c.RetryDelay)
+		// Add custom header for analytics
+		session.secretsManagerClient.SetDefaultHeaders(gohttp.Header{
+			"X-Original-User-Agent": {fmt.Sprintf("terraform-provider-ibm/%s", version.Version)},
+		})
+	} else {
+		session.secretsManagerClientErr = fmt.Errorf("Error occurred while configuring IBM Cloud Secrets Manager API service: %q", err)
+	}
 
 	// SATELLITE Service
 	containerEndpoint := kubernetesserviceapiv1.DefaultServiceURL

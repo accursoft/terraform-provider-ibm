@@ -19,11 +19,11 @@ import (
 
 func ResourceIBMSmSecretGroup() *schema.Resource {
 	return &schema.Resource{
-		CreateContext:   ResourceIBMSmSecretGroupCreate,
-		ReadContext:     ResourceIBMSmSecretGroupRead,
-		UpdateContext:   ResourceIBMSmSecretGroupUpdate,
-		DeleteContext:   ResourceIBMSmSecretGroupDelete,
-		Importer: &schema.ResourceImporter{},
+		CreateContext: ResourceIBMSmSecretGroupCreate,
+		ReadContext:   ResourceIBMSmSecretGroupRead,
+		UpdateContext: ResourceIBMSmSecretGroupUpdate,
+		DeleteContext: ResourceIBMSmSecretGroupDelete,
+		Importer:      &schema.ResourceImporter{},
 
 		Schema: map[string]*schema.Schema{
 			"secret_group_resource": &schema.Schema{
@@ -230,10 +230,10 @@ func ResourceIBMSmSecretGroupMapToSecretGroupResource(modelMap map[string]interf
 		model.Description = core.StringPtr(modelMap["description"].(string))
 	}
 	if modelMap["creation_date"] != nil {
-	
+
 	}
 	if modelMap["last_update_date"] != nil {
-	
+
 	}
 	if modelMap["type"] != nil && modelMap["type"].(string) != "" {
 		model.Type = core.StringPtr(modelMap["type"].(string))

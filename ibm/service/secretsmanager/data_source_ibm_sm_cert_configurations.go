@@ -57,8 +57,8 @@ func DataSourceIBMSmCertConfigurations() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"certificate_authorities": &schema.Schema{
-							Type:        schema.TypeList,
-							Computed:    true,
+							Type:     schema.TypeList,
+							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"name": &schema.Schema{
@@ -75,8 +75,8 @@ func DataSourceIBMSmCertConfigurations() *schema.Resource {
 							},
 						},
 						"dns_providers": &schema.Schema{
-							Type:        schema.TypeList,
-							Computed:    true,
+							Type:     schema.TypeList,
+							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"name": &schema.Schema{
@@ -93,8 +93,8 @@ func DataSourceIBMSmCertConfigurations() *schema.Resource {
 							},
 						},
 						"root_certificate_authorities": &schema.Schema{
-							Type:        schema.TypeList,
-							Computed:    true,
+							Type:     schema.TypeList,
+							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"name": &schema.Schema{
@@ -292,8 +292,8 @@ func DataSourceIBMSmCertConfigurations() *schema.Resource {
 							},
 						},
 						"intermediate_certificate_authorities": &schema.Schema{
-							Type:        schema.TypeList,
-							Computed:    true,
+							Type:     schema.TypeList,
+							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"name": &schema.Schema{
@@ -483,8 +483,8 @@ func DataSourceIBMSmCertConfigurations() *schema.Resource {
 							},
 						},
 						"certificate_templates": &schema.Schema{
-							Type:        schema.TypeList,
-							Computed:    true,
+							Type:     schema.TypeList,
+							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"name": &schema.Schema{
@@ -781,7 +781,7 @@ func DataSourceIBMSmCertConfigurationsRead(context context.Context, d *schema.Re
 
 	resources := []map[string]interface{}{}
 	if getConfigElements.Resources != nil {
-		for _, modelItem := range getConfigElements.Resources { 
+		for _, modelItem := range getConfigElements.Resources {
 			modelMap, err := DataSourceIBMSmCertConfigurationsGetConfigElementsResourcesItemToMap(modelItem)
 			if err != nil {
 				return diag.FromErr(err)

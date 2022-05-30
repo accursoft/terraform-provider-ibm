@@ -113,7 +113,7 @@ func DataSourceIBMSmSecretGroupsRead(context context.Context, d *schema.Resource
 
 	resources := []map[string]interface{}{}
 	if secretGroupDef.Resources != nil {
-		for _, modelItem := range secretGroupDef.Resources { 
+		for _, modelItem := range secretGroupDef.Resources {
 			modelMap, err := DataSourceIBMSmSecretGroupsSecretGroupResourceToMap(&modelItem)
 			if err != nil {
 				return diag.FromErr(err)
