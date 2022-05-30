@@ -11,9 +11,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
+	acc "github.com/IBM-Cloud/terraform-provider-ibm/ibm/acctest"
 	"github.com/IBM-Cloud/terraform-provider-ibm/ibm/conns"
 	"github.com/IBM/secrets-manager-go-sdk/secretsmanagerv1"
-	acc "github.com/IBM-Cloud/terraform-provider-ibm/ibm/acctest"
 )
 
 func TestAccIBMSmEventNotificationBasic(t *testing.T) {
@@ -91,7 +91,7 @@ func testAccCheckIBMSmEventNotificationConfig(eventNotificationsInstanceCRN stri
 func testAccCheckIBMSmEventNotificationExists(n string, obj secretsmanagerv1.NotificationsSettings) resource.TestCheckFunc {
 
 	return func(s *terraform.State) error {
-		rs, ok := s.RootModule().Resources[n]
+		_, ok := s.RootModule().Resources[n]
 		if !ok {
 			return fmt.Errorf("Not found: %s", n)
 		}
@@ -102,8 +102,6 @@ func testAccCheckIBMSmEventNotificationExists(n string, obj secretsmanagerv1.Not
 		}
 
 		getNotificationsRegistrationOptions := &secretsmanagerv1.GetNotificationsRegistrationOptions{}
-
-		getNotificationsRegistrationOptions.(rs.Primary.ID)
 
 		notificationsSettings, _, err := secretsManagerClient.GetNotificationsRegistration(getNotificationsRegistrationOptions)
 		if err != nil {
@@ -126,8 +124,6 @@ func testAccCheckIBMSmEventNotificationDestroy(s *terraform.State) error {
 		}
 
 		getNotificationsRegistrationOptions := &secretsmanagerv1.GetNotificationsRegistrationOptions{}
-
-		getNotificationsRegistrationOptions.(rs.Primary.ID)
 
 		// Try to find the key
 		_, response, err := secretsManagerClient.GetNotificationsRegistration(getNotificationsRegistrationOptions)

@@ -20,38 +20,38 @@ import (
 
 func ResourceIBMSmCertConfiguration() *schema.Resource {
 	return &schema.Resource{
-		CreateContext:   ResourceIBMSmCertConfigurationCreate,
-		ReadContext:     ResourceIBMSmCertConfigurationRead,
-		UpdateContext:   ResourceIBMSmCertConfigurationUpdate,
-		DeleteContext:   ResourceIBMSmCertConfigurationDelete,
-		Importer: &schema.ResourceImporter{},
+		CreateContext: ResourceIBMSmCertConfigurationCreate,
+		ReadContext:   ResourceIBMSmCertConfigurationRead,
+		UpdateContext: ResourceIBMSmCertConfigurationUpdate,
+		DeleteContext: ResourceIBMSmCertConfigurationDelete,
+		Importer:      &schema.ResourceImporter{},
 
 		Schema: map[string]*schema.Schema{
 			"secret_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 				ValidateFunc: validate.InvokeValidator("ibm_sm_cert_configuration", "secret_type"),
-				Description: "The secret type. Allowable values are: public_cert, private_cert",
+				Description:  "The secret type. Allowable values are: public_cert, private_cert",
 			},
 			"config_element": &schema.Schema{
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 				ValidateFunc: validate.InvokeValidator("ibm_sm_cert_configuration", "config_element"),
-				Description: "The configuration element to define or manage. Allowable values are: certificate_authorities, dns_providers, root_certificate_authorities, intermediate_certificate_authorities, certificate_templates",
+				Description:  "The configuration element to define or manage. Allowable values are: certificate_authorities, dns_providers, root_certificate_authorities, intermediate_certificate_authorities, certificate_templates",
 			},
 			"name": &schema.Schema{
-				Type:        schema.TypeString,
-				Required:    true,
+				Type:         schema.TypeString,
+				Required:     true,
 				ValidateFunc: validate.InvokeValidator("ibm_sm_cert_configuration", "name"),
-				Description: "The human-readable name to assign to your configuration.",
+				Description:  "The human-readable name to assign to your configuration.",
 			},
 			"type": &schema.Schema{
-				Type:        schema.TypeString,
-				Required:    true,
+				Type:         schema.TypeString,
+				Required:     true,
 				ValidateFunc: validate.InvokeValidator("ibm_sm_cert_configuration", "type"),
-				Description: "The type of configuration. Value options differ depending on the 'config_element'. Allowable values are: letsencrypt, letsencrypt-stage, cis, classic_infrastructure, root_certificate_authority, intermediate_certificate_authority",
+				Description:  "The type of configuration. Value options differ depending on the 'config_element'. Allowable values are: letsencrypt, letsencrypt-stage, cis, classic_infrastructure, root_certificate_authority, intermediate_certificate_authority",
 			},
 			"config": &schema.Schema{
 				Type:        schema.TypeList,
@@ -557,12 +557,12 @@ func ResourceIBMSmCertConfigurationUpdate(context context.Context, d *schema.Res
 	hasChange := false
 
 	if d.HasChange("secret_type") {
-		return diag.FromErr(fmt.Errorf("Cannot update resource property \"%s\" with the ForceNew annotation." +
-				" The resource must be re-created to update this property.", "secret_type"))
+		return diag.FromErr(fmt.Errorf("Cannot update resource property \"%s\" with the ForceNew annotation."+
+			" The resource must be re-created to update this property.", "secret_type"))
 	}
 	if d.HasChange("config_element") {
-		return diag.FromErr(fmt.Errorf("Cannot update resource property \"%s\" with the ForceNew annotation." +
-				" The resource must be re-created to update this property.", "config_element"))
+		return diag.FromErr(fmt.Errorf("Cannot update resource property \"%s\" with the ForceNew annotation."+
+			" The resource must be re-created to update this property.", "config_element"))
 	}
 	if d.HasChange("name") || d.HasChange("type") || d.HasChange("config") {
 		updateConfigElementOptions.SetName(d.Get("name").(string))
@@ -632,10 +632,10 @@ func ResourceIBMSmCertConfigurationMapToConfigElementDefConfig(modelMap map[stri
 		model.ClassicInfrastructurePassword = core.StringPtr(modelMap["classic_infrastructure_password"].(string))
 	}
 	if modelMap["max_ttl"] != nil {
-	
+
 	}
 	if modelMap["crl_expiry"] != nil {
-	
+
 	}
 	if modelMap["crl_disable"] != nil {
 		model.CrlDisable = core.BoolPtr(modelMap["crl_disable"].(bool))
@@ -653,7 +653,7 @@ func ResourceIBMSmCertConfigurationMapToConfigElementDefConfig(modelMap map[stri
 		model.Status = core.StringPtr(modelMap["status"].(string))
 	}
 	if modelMap["expiration_date"] != nil {
-	
+
 	}
 	if modelMap["alt_names"] != nil && modelMap["alt_names"].(string) != "" {
 		model.AltNames = core.StringPtr(modelMap["alt_names"].(string))
@@ -672,7 +672,7 @@ func ResourceIBMSmCertConfigurationMapToConfigElementDefConfig(modelMap map[stri
 		model.OtherSans = otherSans
 	}
 	if modelMap["ttl"] != nil {
-	
+
 	}
 	if modelMap["format"] != nil && modelMap["format"].(string) != "" {
 		model.Format = core.StringPtr(modelMap["format"].(string))
@@ -752,7 +752,7 @@ func ResourceIBMSmCertConfigurationMapToConfigElementDefConfig(modelMap map[stri
 		model.SerialNumber = core.StringPtr(modelMap["serial_number"].(string))
 	}
 	if modelMap["data"] != nil {
-	
+
 	}
 	if modelMap["signing_method"] != nil && modelMap["signing_method"].(string) != "" {
 		model.SigningMethod = core.StringPtr(modelMap["signing_method"].(string))
@@ -864,7 +864,7 @@ func ResourceIBMSmCertConfigurationMapToConfigElementDefConfig(modelMap map[stri
 		model.BasicConstraintsValidForNonCa = core.BoolPtr(modelMap["basic_constraints_valid_for_non_ca"].(bool))
 	}
 	if modelMap["not_before_duration"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -895,7 +895,7 @@ func ResourceIBMSmCertConfigurationMapToRootCertificateAuthorityConfig(modelMap 
 	model := &secretsmanagerv1.RootCertificateAuthorityConfig{}
 
 	if modelMap["crl_expiry"] != nil {
-	
+
 	}
 	if modelMap["crl_disable"] != nil {
 		model.CrlDisable = core.BoolPtr(modelMap["crl_disable"].(bool))
@@ -911,7 +911,7 @@ func ResourceIBMSmCertConfigurationMapToRootCertificateAuthorityConfig(modelMap 
 		model.Status = core.StringPtr(modelMap["status"].(string))
 	}
 	if modelMap["expiration_date"] != nil {
-	
+
 	}
 	if modelMap["alt_names"] != nil && modelMap["alt_names"].(string) != "" {
 		model.AltNames = core.StringPtr(modelMap["alt_names"].(string))
@@ -930,7 +930,7 @@ func ResourceIBMSmCertConfigurationMapToRootCertificateAuthorityConfig(modelMap 
 		model.OtherSans = otherSans
 	}
 	if modelMap["ttl"] != nil {
-	
+
 	}
 	if modelMap["format"] != nil && modelMap["format"].(string) != "" {
 		model.Format = core.StringPtr(modelMap["format"].(string))
@@ -1010,7 +1010,7 @@ func ResourceIBMSmCertConfigurationMapToRootCertificateAuthorityConfig(modelMap 
 		model.SerialNumber = core.StringPtr(modelMap["serial_number"].(string))
 	}
 	if modelMap["data"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -1023,7 +1023,7 @@ func ResourceIBMSmCertConfigurationMapToIntermediateCertificateAuthorityConfig(m
 		model.Issuer = core.StringPtr(modelMap["issuer"].(string))
 	}
 	if modelMap["crl_expiry"] != nil {
-	
+
 	}
 	if modelMap["crl_disable"] != nil {
 		model.CrlDisable = core.BoolPtr(modelMap["crl_disable"].(bool))
@@ -1039,7 +1039,7 @@ func ResourceIBMSmCertConfigurationMapToIntermediateCertificateAuthorityConfig(m
 		model.Status = core.StringPtr(modelMap["status"].(string))
 	}
 	if modelMap["expiration_date"] != nil {
-	
+
 	}
 	if modelMap["alt_names"] != nil && modelMap["alt_names"].(string) != "" {
 		model.AltNames = core.StringPtr(modelMap["alt_names"].(string))
@@ -1125,7 +1125,7 @@ func ResourceIBMSmCertConfigurationMapToIntermediateCertificateAuthorityConfig(m
 		model.SerialNumber = core.StringPtr(modelMap["serial_number"].(string))
 	}
 	if modelMap["data"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -1137,10 +1137,10 @@ func ResourceIBMSmCertConfigurationMapToCertificateTemplateConfig(modelMap map[s
 		model.AllowedSecretGroups = core.StringPtr(modelMap["allowed_secret_groups"].(string))
 	}
 	if modelMap["max_ttl"] != nil {
-	
+
 	}
 	if modelMap["ttl"] != nil {
-	
+
 	}
 	if modelMap["allow_localhost"] != nil {
 		model.AllowLocalhost = core.BoolPtr(modelMap["allow_localhost"].(bool))
@@ -1298,7 +1298,7 @@ func ResourceIBMSmCertConfigurationMapToCertificateTemplateConfig(modelMap map[s
 		model.BasicConstraintsValidForNonCa = core.BoolPtr(modelMap["basic_constraints_valid_for_non_ca"].(bool))
 	}
 	if modelMap["not_before_duration"] != nil {
-	
+
 	}
 	return model, nil
 }

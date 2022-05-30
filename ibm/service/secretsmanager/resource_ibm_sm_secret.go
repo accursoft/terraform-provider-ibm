@@ -20,25 +20,25 @@ import (
 
 func ResourceIBMSmSecret() *schema.Resource {
 	return &schema.Resource{
-		CreateContext:   ResourceIBMSmSecretCreate,
-		ReadContext:     ResourceIBMSmSecretRead,
-		UpdateContext:   ResourceIBMSmSecretUpdate,
-		DeleteContext:   ResourceIBMSmSecretDelete,
-		Importer: &schema.ResourceImporter{},
+		CreateContext: ResourceIBMSmSecretCreate,
+		ReadContext:   ResourceIBMSmSecretRead,
+		UpdateContext: ResourceIBMSmSecretUpdate,
+		DeleteContext: ResourceIBMSmSecretDelete,
+		Importer:      &schema.ResourceImporter{},
 
 		Schema: map[string]*schema.Schema{
 			"secret_type": &schema.Schema{
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
+				Type:         schema.TypeString,
+				Required:     true,
+				ForceNew:     true,
 				ValidateFunc: validate.InvokeValidator("ibm_sm_secret", "secret_type"),
-				Description: "The secret type. Allowable values are: arbitrary, iam_credentials, imported_cert, public_cert, username_password, kv.",
+				Description:  "The secret type. Allowable values are: arbitrary, iam_credentials, imported_cert, public_cert, username_password, kv.",
 			},
 			"secret_resource": &schema.Schema{
-				Type:        schema.TypeList,
-				MinItems:    1,
-				MaxItems:    1,
-				Required:    true,
+				Type:     schema.TypeList,
+				MinItems: 1,
+				MaxItems: 1,
+				Required: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"id": &schema.Schema{
@@ -121,7 +121,7 @@ func ResourceIBMSmSecret() *schema.Resource {
 							Optional:    true,
 							Computed:    true,
 							Description: "An array that contains metadata for each secret version. For more information on the metadata properties, see [Get secret version metadata](#get-secret-version-metadata).",
-							Elem: &schema.Schema{Type: schema.TypeString},
+							Elem:        &schema.Schema{Type: schema.TypeString},
 						},
 						"expiration_date": &schema.Schema{
 							Type:        schema.TypeString,
@@ -235,9 +235,9 @@ func ResourceIBMSmSecret() *schema.Resource {
 							Description: "The distinguished name that identifies the entity that signed and issued the certificate.",
 						},
 						"validity": &schema.Schema{
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"not_before": &schema.Schema{
@@ -293,9 +293,9 @@ func ResourceIBMSmSecret() *schema.Resource {
 							Description: "The name of the DNS provider configuration.",
 						},
 						"rotation": &schema.Schema{
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auto_rotate": &schema.Schema{
@@ -507,7 +507,7 @@ func ResourceIBMSmSecret() *schema.Resource {
 				Type:        schema.TypeList,
 				Computed:    true,
 				Description: "An array that contains metadata for each secret version. For more information on the metadata properties, see [Get secret version metadata](#get-secret-version-metadata).",
-				Elem: &schema.Schema{Type: schema.TypeString},
+				Elem:        &schema.Schema{Type: schema.TypeString},
 			},
 			"expiration_date": &schema.Schema{
 				Type:        schema.TypeString,
@@ -611,8 +611,8 @@ func ResourceIBMSmSecret() *schema.Resource {
 				Description: "The distinguished name that identifies the entity that signed and issued the certificate.",
 			},
 			"validity": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
+				Type:     schema.TypeList,
+				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"not_before": &schema.Schema{
@@ -664,8 +664,8 @@ func ResourceIBMSmSecret() *schema.Resource {
 				Description: "The name of the DNS provider configuration.",
 			},
 			"rotation": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
+				Type:     schema.TypeList,
+				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"auto_rotate": &schema.Schema{
@@ -1102,8 +1102,8 @@ func ResourceIBMSmSecretUpdate(context context.Context, d *schema.ResourceData, 
 	hasChange := false
 
 	if d.HasChange("secret_type") {
-		return diag.FromErr(fmt.Errorf("Cannot update resource property \"%s\" with the ForceNew annotation." +
-				" The resource must be re-created to update this property.", "secret_type"))
+		return diag.FromErr(fmt.Errorf("Cannot update resource property \"%s\" with the ForceNew annotation."+
+			" The resource must be re-created to update this property.", "secret_type"))
 	}
 	if d.HasChange("secret_resource") {
 		secretResource := d.Get("secret_resource.0").(map[string]interface{})
@@ -1183,13 +1183,13 @@ func ResourceIBMSmSecretMapToSecretResource(modelMap map[string]interface{}) (se
 		model.CRN = core.StringPtr(modelMap["crn"].(string))
 	}
 	if modelMap["creation_date"] != nil {
-	
+
 	}
 	if modelMap["created_by"] != nil && modelMap["created_by"].(string) != "" {
 		model.CreatedBy = core.StringPtr(modelMap["created_by"].(string))
 	}
 	if modelMap["last_update_date"] != nil {
-	
+
 	}
 	if modelMap["versions_total"] != nil {
 		model.VersionsTotal = core.Int64Ptr(int64(modelMap["versions_total"].(int)))
@@ -1202,13 +1202,13 @@ func ResourceIBMSmSecretMapToSecretResource(modelMap map[string]interface{}) (se
 		model.Versions = versions
 	}
 	if modelMap["expiration_date"] != nil {
-	
+
 	}
 	if modelMap["payload"] != nil && modelMap["payload"].(string) != "" {
 		model.Payload = core.StringPtr(modelMap["payload"].(string))
 	}
 	if modelMap["secret_data"] != nil {
-	
+
 	}
 	if modelMap["username"] != nil && modelMap["username"].(string) != "" {
 		model.Username = core.StringPtr(modelMap["username"].(string))
@@ -1217,10 +1217,10 @@ func ResourceIBMSmSecretMapToSecretResource(modelMap map[string]interface{}) (se
 		model.Password = core.StringPtr(modelMap["password"].(string))
 	}
 	if modelMap["next_rotation_date"] != nil {
-	
+
 	}
 	if modelMap["ttl"] != nil {
-	
+
 	}
 	if modelMap["access_groups"] != nil {
 		accessGroups := []string{}
@@ -1282,7 +1282,7 @@ func ResourceIBMSmSecretMapToSecretResource(modelMap map[string]interface{}) (se
 		model.PrivateKeyIncluded = core.BoolPtr(modelMap["private_key_included"].(bool))
 	}
 	if modelMap["alt_names"] != nil {
-	
+
 	}
 	if modelMap["bundle_certs"] != nil {
 		model.BundleCerts = core.BoolPtr(modelMap["bundle_certs"].(bool))
@@ -1339,7 +1339,7 @@ func ResourceIBMSmSecretMapToSecretResource(modelMap map[string]interface{}) (se
 		model.RevocationTime = core.Int64Ptr(int64(modelMap["revocation_time"].(int)))
 	}
 	if modelMap["revocation_time_rfc3339"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -1347,10 +1347,10 @@ func ResourceIBMSmSecretMapToSecretResource(modelMap map[string]interface{}) (se
 func ResourceIBMSmSecretMapToCertificateValidity(modelMap map[string]interface{}) (*secretsmanagerv1.CertificateValidity, error) {
 	model := &secretsmanagerv1.CertificateValidity{}
 	if modelMap["not_before"] != nil {
-	
+
 	}
 	if modelMap["not_after"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -1375,7 +1375,7 @@ func ResourceIBMSmSecretMapToRotation(modelMap map[string]interface{}) (*secrets
 func ResourceIBMSmSecretMapToIssuanceInfo(modelMap map[string]interface{}) (*secretsmanagerv1.IssuanceInfo, error) {
 	model := &secretsmanagerv1.IssuanceInfo{}
 	if modelMap["ordered_on"] != nil {
-	
+
 	}
 	if modelMap["error_code"] != nil && modelMap["error_code"].(string) != "" {
 		model.ErrorCode = core.StringPtr(modelMap["error_code"].(string))
@@ -1436,13 +1436,13 @@ func ResourceIBMSmSecretMapToArbitrarySecretResource(modelMap map[string]interfa
 		model.CRN = core.StringPtr(modelMap["crn"].(string))
 	}
 	if modelMap["creation_date"] != nil {
-	
+
 	}
 	if modelMap["created_by"] != nil && modelMap["created_by"].(string) != "" {
 		model.CreatedBy = core.StringPtr(modelMap["created_by"].(string))
 	}
 	if modelMap["last_update_date"] != nil {
-	
+
 	}
 	if modelMap["versions_total"] != nil {
 		model.VersionsTotal = core.Int64Ptr(int64(modelMap["versions_total"].(int)))
@@ -1455,13 +1455,13 @@ func ResourceIBMSmSecretMapToArbitrarySecretResource(modelMap map[string]interfa
 		model.Versions = versions
 	}
 	if modelMap["expiration_date"] != nil {
-	
+
 	}
 	if modelMap["payload"] != nil && modelMap["payload"].(string) != "" {
 		model.Payload = core.StringPtr(modelMap["payload"].(string))
 	}
 	if modelMap["secret_data"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -1498,13 +1498,13 @@ func ResourceIBMSmSecretMapToUsernamePasswordSecretResource(modelMap map[string]
 		model.CRN = core.StringPtr(modelMap["crn"].(string))
 	}
 	if modelMap["creation_date"] != nil {
-	
+
 	}
 	if modelMap["created_by"] != nil && modelMap["created_by"].(string) != "" {
 		model.CreatedBy = core.StringPtr(modelMap["created_by"].(string))
 	}
 	if modelMap["last_update_date"] != nil {
-	
+
 	}
 	if modelMap["versions_total"] != nil {
 		model.VersionsTotal = core.Int64Ptr(int64(modelMap["versions_total"].(int)))
@@ -1523,13 +1523,13 @@ func ResourceIBMSmSecretMapToUsernamePasswordSecretResource(modelMap map[string]
 		model.Password = core.StringPtr(modelMap["password"].(string))
 	}
 	if modelMap["secret_data"] != nil {
-	
+
 	}
 	if modelMap["expiration_date"] != nil {
-	
+
 	}
 	if modelMap["next_rotation_date"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -1566,13 +1566,13 @@ func ResourceIBMSmSecretMapToIamCredentialsSecretResource(modelMap map[string]in
 		model.CRN = core.StringPtr(modelMap["crn"].(string))
 	}
 	if modelMap["creation_date"] != nil {
-	
+
 	}
 	if modelMap["created_by"] != nil && modelMap["created_by"].(string) != "" {
 		model.CreatedBy = core.StringPtr(modelMap["created_by"].(string))
 	}
 	if modelMap["last_update_date"] != nil {
-	
+
 	}
 	if modelMap["versions_total"] != nil {
 		model.VersionsTotal = core.Int64Ptr(int64(modelMap["versions_total"].(int)))
@@ -1585,7 +1585,7 @@ func ResourceIBMSmSecretMapToIamCredentialsSecretResource(modelMap map[string]in
 		model.Versions = versions
 	}
 	if modelMap["ttl"] != nil {
-	
+
 	}
 	if modelMap["access_groups"] != nil {
 		accessGroups := []string{}
@@ -1644,13 +1644,13 @@ func ResourceIBMSmSecretMapToCertificateSecretResource(modelMap map[string]inter
 		model.CRN = core.StringPtr(modelMap["crn"].(string))
 	}
 	if modelMap["creation_date"] != nil {
-	
+
 	}
 	if modelMap["created_by"] != nil && modelMap["created_by"].(string) != "" {
 		model.CreatedBy = core.StringPtr(modelMap["created_by"].(string))
 	}
 	if modelMap["last_update_date"] != nil {
-	
+
 	}
 	if modelMap["versions_total"] != nil {
 		model.VersionsTotal = core.Int64Ptr(int64(modelMap["versions_total"].(int)))
@@ -1672,7 +1672,7 @@ func ResourceIBMSmSecretMapToCertificateSecretResource(modelMap map[string]inter
 		model.Intermediate = core.StringPtr(modelMap["intermediate"].(string))
 	}
 	if modelMap["secret_data"] != nil {
-	
+
 	}
 	if modelMap["serial_number"] != nil && modelMap["serial_number"].(string) != "" {
 		model.SerialNumber = core.StringPtr(modelMap["serial_number"].(string))
@@ -1703,10 +1703,10 @@ func ResourceIBMSmSecretMapToCertificateSecretResource(modelMap map[string]inter
 		model.PrivateKeyIncluded = core.BoolPtr(modelMap["private_key_included"].(bool))
 	}
 	if modelMap["alt_names"] != nil {
-	
+
 	}
 	if modelMap["expiration_date"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -1743,13 +1743,13 @@ func ResourceIBMSmSecretMapToPublicCertificateSecretResource(modelMap map[string
 		model.CRN = core.StringPtr(modelMap["crn"].(string))
 	}
 	if modelMap["creation_date"] != nil {
-	
+
 	}
 	if modelMap["created_by"] != nil && modelMap["created_by"].(string) != "" {
 		model.CreatedBy = core.StringPtr(modelMap["created_by"].(string))
 	}
 	if modelMap["last_update_date"] != nil {
-	
+
 	}
 	if modelMap["versions_total"] != nil {
 		model.VersionsTotal = core.Int64Ptr(int64(modelMap["versions_total"].(int)))
@@ -1780,7 +1780,7 @@ func ResourceIBMSmSecretMapToPublicCertificateSecretResource(modelMap map[string
 		model.KeyAlgorithm = core.StringPtr(modelMap["key_algorithm"].(string))
 	}
 	if modelMap["alt_names"] != nil {
-	
+
 	}
 	if modelMap["common_name"] != nil && modelMap["common_name"].(string) != "" {
 		model.CommonName = core.StringPtr(modelMap["common_name"].(string))
@@ -1816,7 +1816,7 @@ func ResourceIBMSmSecretMapToPublicCertificateSecretResource(modelMap map[string
 		model.SerialNumber = core.StringPtr(modelMap["serial_number"].(string))
 	}
 	if modelMap["secret_data"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -1853,13 +1853,13 @@ func ResourceIBMSmSecretMapToPrivateCertificateSecretResource(modelMap map[strin
 		model.CRN = core.StringPtr(modelMap["crn"].(string))
 	}
 	if modelMap["creation_date"] != nil {
-	
+
 	}
 	if modelMap["created_by"] != nil && modelMap["created_by"].(string) != "" {
 		model.CreatedBy = core.StringPtr(modelMap["created_by"].(string))
 	}
 	if modelMap["last_update_date"] != nil {
-	
+
 	}
 	if modelMap["versions_total"] != nil {
 		model.VersionsTotal = core.Int64Ptr(int64(modelMap["versions_total"].(int)))
@@ -1877,7 +1877,7 @@ func ResourceIBMSmSecretMapToPrivateCertificateSecretResource(modelMap map[strin
 	}
 	model.CommonName = core.StringPtr(modelMap["common_name"].(string))
 	if modelMap["alt_names"] != nil {
-	
+
 	}
 	if modelMap["ip_sans"] != nil && modelMap["ip_sans"].(string) != "" {
 		model.IPSans = core.StringPtr(modelMap["ip_sans"].(string))
@@ -1893,7 +1893,7 @@ func ResourceIBMSmSecretMapToPrivateCertificateSecretResource(modelMap map[strin
 		model.OtherSans = otherSans
 	}
 	if modelMap["ttl"] != nil {
-	
+
 	}
 	if modelMap["format"] != nil && modelMap["format"].(string) != "" {
 		model.Format = core.StringPtr(modelMap["format"].(string))
@@ -1934,10 +1934,10 @@ func ResourceIBMSmSecretMapToPrivateCertificateSecretResource(modelMap map[strin
 		model.RevocationTime = core.Int64Ptr(int64(modelMap["revocation_time"].(int)))
 	}
 	if modelMap["revocation_time_rfc3339"] != nil {
-	
+
 	}
 	if modelMap["secret_data"] != nil {
-	
+
 	}
 	return model, nil
 }
@@ -1974,13 +1974,13 @@ func ResourceIBMSmSecretMapToKvSecretResource(modelMap map[string]interface{}) (
 		model.CRN = core.StringPtr(modelMap["crn"].(string))
 	}
 	if modelMap["creation_date"] != nil {
-	
+
 	}
 	if modelMap["created_by"] != nil && modelMap["created_by"].(string) != "" {
 		model.CreatedBy = core.StringPtr(modelMap["created_by"].(string))
 	}
 	if modelMap["last_update_date"] != nil {
-	
+
 	}
 	if modelMap["versions_total"] != nil {
 		model.VersionsTotal = core.Int64Ptr(int64(modelMap["versions_total"].(int)))
@@ -1993,13 +1993,13 @@ func ResourceIBMSmSecretMapToKvSecretResource(modelMap map[string]interface{}) (
 		model.Versions = versions
 	}
 	if modelMap["expiration_date"] != nil {
-	
+
 	}
 	if modelMap["payload"] != nil {
-	
+
 	}
 	if modelMap["secret_data"] != nil {
-	
+
 	}
 	return model, nil
 }
