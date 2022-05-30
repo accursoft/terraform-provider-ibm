@@ -432,11 +432,7 @@ func dataSourceListSecretsResourcesToMap(resourcesItem secretsmanagerv1.SecretRe
 		resourcesMap["last_update_date"] = (*resourcesItem.LastUpdateDate).String()
 	}
 	if resourcesItem.Versions != nil {
-		versionsList := []map[string]interface{}{}
-		for _, versionsItem := range resourcesItem.Versions {
-			versionsList = append(versionsList, dataSourceListSecretsResourcesVersionsToMap(versionsItem))
-		}
-		resourcesMap["versions"] = versionsList
+		resourcesMap["versions"] = resourcesItem.Versions
 	}
 	if resourcesItem.ExpirationDate != nil {
 		resourcesMap["expiration_date"] = (*resourcesItem.ExpirationDate).String()
